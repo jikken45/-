@@ -1,0 +1,25 @@
+@startuml
+:従業員から謹告報告用紙提出;
+:提出内容の内容チェック（必要項目の抜け漏れ）;
+partition 謹告掲示 {
+:謹告内容をExcelシートに入力;
+:WordファイルにExcelシートの内容を差し込み印刷;
+note right
+  ・通夜なしなどの特殊事例の場合Wordファイルの編集が必要
+end note
+}
+if (本社従業員の申請である) then (はい)
+partition 弔電依頼 {
+:佐川ヒューモニーのサイトにアクセスし、弔電情報入力;
+note right
+  弔事者の続柄によって弔電の内容が変化
+end note
+}
+partition 生花発注
+:謹告情報をもとに日花への発注書作成;
+}
+else (いいえ)
+:処理終了;
+detach
+endif
+@enduml
